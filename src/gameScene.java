@@ -11,7 +11,7 @@ public class gameScene extends Scene{
     Camera camera;
 
     public gameScene(Group g) {
-        super(g);
+        super(g, 600,300);
         camera= new Camera(10,10);
         //render();
     }
