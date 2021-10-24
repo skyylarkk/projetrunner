@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class gameScene extends Scene{
     Camera camera;
+    StaticThings gauche;
+    StaticThings droite;
 
     public gameScene(Group g) {
         super(g, 600,300);

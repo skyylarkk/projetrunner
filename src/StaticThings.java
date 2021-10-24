@@ -11,10 +11,15 @@ public class StaticThings {
     private double y;
     private static ImageView sprite;
 
+
+
     public StaticThings(double x, double y, String filename) {
         this.x = x;
         this.y = y;
         Image image = new Image(filename);
         sprite = new ImageView(image);
+    }
+    public static ImageView getSprite() {
+        return sprite;
     }
 }
