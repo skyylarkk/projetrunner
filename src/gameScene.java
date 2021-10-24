@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 
 
 public class gameScene extends Scene{
-    Camera camera;
-    StaticThings gauche;
-    StaticThings droite;
+    private Camera camera;
+    private StaticThings gauche;
+    private StaticThings droite;
 
     public gameScene(Group g) {
         super(g, 600,300);
         camera= new Camera(10,10);
+        gauche= new StaticThings(100,100,"desert.png");
+        droite= new StaticThings(100,100,"desert.png");
         //render();
     }
    /* void render(){
