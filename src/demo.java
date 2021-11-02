@@ -14,15 +14,15 @@ import javafx.stage.Stage;
         private static final Image SCENERY = new Image("desert.png", 600, 400, true, true);
         final private ImageView ImageViewSceneryLeft = new ImageView(SCENERY);
 
-       private hero Hero = new hero(10,175,"heros.png");
+
         public void start(Stage primaryStage){
             primaryStage.setTitle("Demo");
             Group root = new Group();
             gameScene scene = new gameScene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
-            root.getChildren().add(ImageViewSceneryLeft);
-            root.getChildren().add(Hero.getSprite());
+            //root.getChildren().add(ImageViewSceneryLeft);
+            //root.getChildren().add(Hero.getSprite());
         }
         public static void main(String[] args) {
             launch(args);

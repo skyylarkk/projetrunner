@@ -8,23 +8,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class hero extends Node {
+public class hero extends AnimatedThings {
 
 
     private double x;
     private double y;
-    private static Image spritesheet=null;
-    private static ImageView sprite;
+    private  Image spritesheet=null;
+    private  ImageView sprite;
 
 
-    public hero (double x, double y, String fileName){
-        this.x=x;
+    public hero  (double x, double y, String fileName){
+        super(fileName,x , y,70,90,100,1,6,10,10);
+
+        /*this.x=x;
         this.y=y;
         spritesheet=new Image(fileName);
         sprite = new ImageView(spritesheet);
         sprite.setViewport(new Rectangle2D(10,10,70,90));
         sprite.setX(x);
-        sprite.setY(y);
+        sprite.setY(y);*/
 
     }
 
@@ -36,7 +38,7 @@ public class hero extends Node {
         return y;
     }
 
-    public static ImageView getSprite() {
+   /* public static ImageView getSprite() {
         return sprite;
-    }
+    }*/
 }

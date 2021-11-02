@@ -7,9 +7,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class StaticThings {
+
+
     private double x;
     private double y;
-    private static ImageView sprite;
+    private ImageView sprite;
 
 
 
@@ -19,7 +21,15 @@ public class StaticThings {
         Image image = new Image(filename);
         sprite = new ImageView(image);
     }
-    public static ImageView getSprite() {
+    public ImageView getSprite() {
         return sprite;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 }
