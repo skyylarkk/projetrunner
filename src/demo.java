@@ -23,6 +23,7 @@ import javafx.stage.Stage;
             primaryStage.show();
             //root.getChildren().add(ImageViewSceneryLeft);
             //root.getChildren().add(Hero.getSprite());
+
         }
         public static void main(String[] args) {
             launch(args);

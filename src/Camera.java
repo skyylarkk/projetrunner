@@ -1,13 +1,20 @@
+import javafx.geometry.Rectangle2D;
+
 public class Camera {
-    private Integer x;
+
+    private double x;
     private Integer y;
 
 
 
-    public Camera(Integer x, Integer y) {
+    public Camera(double x, Integer y) {
         this.x = x;
         this.y = y;
     }
+    public void setX(double x) {
+        this.x = x;
+    }
+
 
     @Override
     public String toString() {
@@ -17,7 +24,7 @@ public class Camera {
                 '}';
     }
 
-    public Integer getX() {
+    public double getX() {
         return x;
     }
 

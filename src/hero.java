@@ -18,7 +18,7 @@ public class hero extends AnimatedThings {
 
 
     public hero  (double x, double y, String fileName){
-        super(fileName,x , y,70,90,100,1,6,10,10);
+        super(fileName,x , y,75,100,85,1,6,4,5);
 
         /*this.x=x;
         this.y=y;
@@ -30,6 +30,12 @@ public class hero extends AnimatedThings {
 
     }
 
+
+    public void jump(){
+        o=true;
+    }
+
+
     public double getX() {
         return x;
     }
@@ -38,7 +44,8 @@ public class hero extends AnimatedThings {
         return y;
     }
 
-   /* public static ImageView getSprite() {
+   /*public ImageView getSprite() {
         return sprite;
     }*/
+
 }
