@@ -22,14 +22,8 @@ public class Foe extends StaticThings {
         getSprite().setViewport(new Rectangle2D(2, 3, 40, 40));
         getSprite().setX(x);
         getSprite().setY(y);
-
-        /*this.x=x;
-        this.y=y;
-        spritesheet=new Image(fileName);
-        sprite = new ImageView(spritesheet);
-        sprite.setViewport(new Rectangle2D(10,10,70,90));
-        sprite.setX(x);
-        sprite.setY(y);*/
+        getSprite().setFitHeight(50);
+        getSprite().setFitWidth(50);
 
     }
 
@@ -50,13 +44,7 @@ public class Foe extends StaticThings {
         return o;
     }
 
-    public void setSpritesheet(Image spritesheet) {
-        this.spritesheet = spritesheet;
-    }
 
-    public void setSprite(ImageView sprite) {
-        this.sprite = sprite;
-    }
 
 
 

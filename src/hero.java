@@ -42,11 +42,11 @@ public class hero extends AnimatedThings {
         g=getSprite().getX();
 
         g=g-t/b;
-        //setX(g);
+
         getSprite().setX(g);
-        b=b-5;
-        //System.out.println(b);
-        if(b<2000){b=2000;}
+        b=b-10;
+        System.out.println(b);
+        if(b<1900){b=1900;}
         if(g>1000){g=1000;}
 
 

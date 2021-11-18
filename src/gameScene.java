@@ -5,7 +5,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,7 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,6 +35,10 @@ public class gameScene extends Scene{
     private Integer nb=200;
     private boolean u=false, go=false;
     private double m=5000000.0;
+    private Integer score=0;
+    private Label scorel;
+    private Label scorel2;
+    private double scoref;
 
 
 
@@ -42,10 +48,17 @@ public class gameScene extends Scene{
         gauche= new StaticThings(800,400,"desert.png");
         mid= new StaticThings(800,400,"desert.png");
         droite= new StaticThings(800,400,"desert.png");
-        Hero = new hero(250,0,"heros.png");
+        Hero = new hero(1000,0,"heros.png");
         mehdi = new Mechant(10,150,"heros.png");
         list = new ArrayList<Foe>();
         gameover=new StaticThings(800,800,"GAME_OVER.png");
+        scorel = new Label("score :");
+        scorel.setTextFill(Color.DARKGREEN);
+        scorel.setLayoutX(600);
+        scorel2 = new Label(score.toString());
+        scorel2.setTextFill(Color.DARKGREEN);
+        scorel2.setLayoutX(640);
+
 
         gameover.hide();
         gameover.getSprite().setX(400);
@@ -53,14 +66,13 @@ public class gameScene extends Scene{
         mehdi.getSprite().setFitHeight(250);
         mehdi.getSprite().setFitWidth(200);
 
-
-
-        //foe = new Foe(250,250,"heros.png");
         g.getChildren().add(gauche.getSprite());
         g.getChildren().add(mid.getSprite());
         g.getChildren().add(droite.getSprite());
         g.getChildren().add(Hero.getSprite());
         g.getChildren().add(mehdi.getSprite());
+        g.getChildren().add(scorel);
+        g.getChildren().add(scorel2);
         g.getChildren().add(gameover.getSprite());
         creator();
         for(int i=0;i< list.size();i++){
@@ -71,8 +83,6 @@ public class gameScene extends Scene{
            Hero.jump();
         });
 
-
-        //hero.update(System.nanoTime());
         timer.start();
 
     }
@@ -80,11 +90,8 @@ public class gameScene extends Scene{
     void creator(){
 
         for (int i = 0;i<nb;i++){
-            //Random rand = new Random();
-            //int nombreAleatoire = rand.nextInt(0 - 240 + 1) + 240;
             list.add(new Foe(x+Math.random()*250,y+Math.random()*150,"piece1.png"));
             x=x+1200;
-
         }
     }
 
@@ -125,18 +132,25 @@ public class gameScene extends Scene{
                mehdi.updatem(elapsedSeconds);
                Hero.slowdown(elapsedSeconds);
                camera.setX(timecam);
-               m=m-1;
+               m=m-0.5;
                render();
+               scoref++;
+               if (scoref%10==0){score=score+1;}
+
+               scorel2.setText(score.toString());
                for(int i=0;i<list.size();i++){
 
                    if((Hero.getSprite().getX()<list.get(i).getSprite().getX()&&Hero.getSprite().getX()+75>list.get(i).getSprite().getX())&&(Hero.getSprite().getY()+100>list.get(i).getSprite().getY()&&Hero.getSprite().getY()-40<list.get(i).getSprite().getY())){
-                       //if(list.get(i).isO()==false) {
+
                        Hero.boost();
                        list.get(i).getSprite().setViewport(new Rectangle2D(300, 300, 1, 1));
-                       list.get(i).used();
-                       //}
+
+
+
+
 
                    }
+
 
                }
 
@@ -146,12 +160,6 @@ public class gameScene extends Scene{
             else{
                 gameover.show();
             }
-
-
-
-
         }
     };
-
-
 }

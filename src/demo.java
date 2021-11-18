@@ -16,36 +16,36 @@ import java.nio.file.Paths;
 
 
     public class demo extends Application{
-        private static final Image SCENERY = new Image("desert.png", 600, 400, true, true);
+        private static final Image SCENERY = new Image("Capture.PNG", 1300, 300, true, true);
         final private ImageView ImageViewSceneryLeft = new ImageView(SCENERY);
         SoundBackground music = new SoundBackground();
 
 
+
+
         public void start(Stage primaryStage){
-
-            /*Media pick = new Media("bit rush.mp3"); // replace this with your own audio file
-            MediaPlayer player = new MediaPlayer(pick);*/
-
-
 
             primaryStage.setTitle("Demo");
             Group root = new Group();
+            Group root2 = new Group();
             gameScene scene = new gameScene(root);
-            primaryStage.setScene(scene);
+            Scene scene2 = new Scene(root2);
+            root2.getChildren().add(ImageViewSceneryLeft);
+            primaryStage.setScene(scene2);
+            scene2.setOnMouseClicked((event)->{
+                primaryStage.setScene(scene);
+            });
             primaryStage.show();
-            music.run();
+
+                music.run();
+
 
 
 
         }
 
-        /*MediaPlayer mediaplayer;
-        public void music(){
-            String s = "bit rush.mp3";
-            Media h = new Media(Paths.get(s).toUri().toString());
-            mediaplayer= new MediaPlayer(h);
-            mediaplayer.play();
-        }*/
+
+
         public static void main(String[] args) {
             launch(args);
             // write your code here
