@@ -15,35 +15,89 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 
 public class gameScene extends Scene{
     private Camera camera;
     private StaticThings gauche;
+    private StaticThings mid;
     private StaticThings droite;
     private hero Hero;
+    private ArrayList<Foe> list;
+    private Mechant mehdi;
+    private StaticThings gameover;
+    private Integer x=100;
+    private Integer y=50;
+    private Integer nb=200;
+    private boolean u=false, go=false;
+    private double m=5000000.0;
+
+
 
     public gameScene(Group g) {
-        super(g, 600,400);
+        super(g, 1300,400);
         camera= new Camera(0,10);
         gauche= new StaticThings(800,400,"desert.png");
+        mid= new StaticThings(800,400,"desert.png");
         droite= new StaticThings(800,400,"desert.png");
-        Hero = new hero(10,250,"heros.png");
+        Hero = new hero(250,0,"heros.png");
+        mehdi = new Mechant(10,150,"heros.png");
+        list = new ArrayList<Foe>();
+        gameover=new StaticThings(800,800,"GAME_OVER.png");
+
+        gameover.hide();
+        gameover.getSprite().setX(400);
+
+        mehdi.getSprite().setFitHeight(250);
+        mehdi.getSprite().setFitWidth(200);
+
+
+
+        //foe = new Foe(250,250,"heros.png");
         g.getChildren().add(gauche.getSprite());
+        g.getChildren().add(mid.getSprite());
         g.getChildren().add(droite.getSprite());
         g.getChildren().add(Hero.getSprite());
+        g.getChildren().add(mehdi.getSprite());
+        g.getChildren().add(gameover.getSprite());
+        creator();
+        for(int i=0;i< list.size();i++){
+            g.getChildren().add(list.get(i).getSprite());
+        }
         render();
         this.setOnMouseClicked((event)->{
            Hero.jump();
         });
 
+
         //hero.update(System.nanoTime());
         timer.start();
+
     }
+
+    void creator(){
+
+        for (int i = 0;i<nb;i++){
+            //Random rand = new Random();
+            //int nombreAleatoire = rand.nextInt(0 - 240 + 1) + 240;
+            list.add(new Foe(x+Math.random()*250,y+Math.random()*150,"piece1.png"));
+            x=x+1200;
+
+        }
+    }
+
+
     void render(){
-        double offset = camera.getX()% droite.getX();
-        gauche.getSprite().setViewport(new Rectangle2D(0,0,gauche.getX(), gauche.getY()));
-        droite.getSprite().setViewport(new Rectangle2D(offset,0,droite.getX()-offset, droite.getY()));
-        gauche.getSprite().setX(gauche.getX()-offset);
+        double offset = camera.getX()% mid.getX();
+        gauche.getSprite().setViewport(new Rectangle2D(offset,0,gauche.getX(), gauche.getY()));
+        mid.getSprite().setViewport(new Rectangle2D(0,0,mid.getX(), mid.getY()));
+        droite.getSprite().setViewport(new Rectangle2D(0,0,droite.getX(), droite.getY()));
+        mid.getSprite().setX(mid.getX()-offset);
+        droite.getSprite().setX(droite.getX()+800-offset);
+
+
 
     }
     AnimationTimer timer = new AnimationTimer() {
@@ -51,22 +105,53 @@ public class gameScene extends Scene{
         @Override
         public void handle(long time) {
 
-            double timecam = time/ 5000000.0;
+            double timecam = time/m;
             long elapsedNanoSeconds = time - lastUpdate;
             double elapsedSeconds = elapsedNanoSeconds / 80000000.0;
-            Hero.update(elapsedSeconds);
-            camera.setX(timecam);
+
+            Hero.setDurée(Hero.getDurée()-0.00001);
+            mehdi.setDurée(mehdi.getDurée()-0.00001);
+
+
+           Hero.gethitbox(75,100);
+           mehdi.gethitbox(300,300);
+
+           if(Hero.getSprite().getX()>mehdi.getX()+200){
+               for(int i=0;i< list.size();i++){
+                   list.get(i).move();
+
+               }
+               Hero.update(elapsedSeconds);
+               mehdi.updatem(elapsedSeconds);
+               Hero.slowdown(elapsedSeconds);
+               camera.setX(timecam);
+               m=m-1;
+               render();
+               for(int i=0;i<list.size();i++){
+
+                   if((Hero.getSprite().getX()<list.get(i).getSprite().getX()&&Hero.getSprite().getX()+75>list.get(i).getSprite().getX())&&(Hero.getSprite().getY()+100>list.get(i).getSprite().getY()&&Hero.getSprite().getY()-40<list.get(i).getSprite().getY())){
+                       //if(list.get(i).isO()==false) {
+                       Hero.boost();
+                       list.get(i).getSprite().setViewport(new Rectangle2D(300, 300, 1, 1));
+                       list.get(i).used();
+                       //}
+
+                   }
+
+               }
+
+
+
+           }
+            else{
+                gameover.show();
+            }
 
 
 
 
-
-            /*double a =droite.getX()-camera.getX()% gauche.getX();
-            double b =droite.getX()-camera.getX()% gauche.getX();
-            double offset = camera.getX()% gauche.getX();*/
-
-           // gameScene.update(time);
-            render();
         }
     };
+
+
 }

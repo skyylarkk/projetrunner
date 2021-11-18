@@ -12,13 +12,14 @@ public class StaticThings {
     private double x;
     private double y;
     private ImageView sprite;
+    private Image image;
 
 
 
     public StaticThings(double x, double y, String filename) {
         this.x = x;
         this.y = y;
-        Image image = new Image(filename);
+        image = new Image(filename);
         sprite = new ImageView(image);
     }
     public ImageView getSprite() {
@@ -32,4 +33,7 @@ public class StaticThings {
     public double getY() {
         return y;
     }
+
+    public void show(){this.sprite.setImage(image);}
+    public void hide(){this.sprite.setImage(null);}
 }

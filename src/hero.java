@@ -13,12 +13,15 @@ public class hero extends AnimatedThings {
 
     private double x;
     private double y;
-    private  Image spritesheet=null;
-    private  ImageView sprite;
+    private Image spritesheet = null;
+    private ImageView sprite;
+    private double t;
+    private double g;
+    private double b=5000;
 
 
-    public hero  (double x, double y, String fileName){
-        super(fileName,x , y,75,100,85,1,6,4,5);
+    public hero(double x, double y, String fileName) {
+        super(fileName, x, y, 75, 100, 85, 1, 6, 4, 5);
 
         /*this.x=x;
         this.y=y;
@@ -31,21 +34,35 @@ public class hero extends AnimatedThings {
     }
 
 
-    public void jump(){
-        o=true;
+    public void jump() {
+        o = true;
     }
 
+    public void slowdown(double t){
+        g=getSprite().getX();
 
-    public double getX() {
-        return x;
+        g=g-t/b;
+        //setX(g);
+        getSprite().setX(g);
+        b=b-5;
+        //System.out.println(b);
+        if(b<2000){b=2000;}
+        if(g>1000){g=1000;}
+
+
+
+    }
+    public void boost(){
+
+            for (int i = 0; i < 30; i++) {
+
+
+                g = g + 1;
+                getSprite().setX(g);
+
+            }
+
     }
 
-    public double getY() {
-        return y;
-    }
-
-   /*public ImageView getSprite() {
-        return sprite;
-    }*/
 
 }

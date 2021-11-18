@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.lang.*;
+import java.util.ArrayList;
 
 abstract public class AnimatedThings {
     private ImageView sprite;
@@ -26,6 +27,7 @@ abstract public class AnimatedThings {
     private double lasttime=0;
     private double t;
     protected boolean o;
+
 
     protected double a=9.83,v,p,p2;
 
@@ -53,44 +55,62 @@ abstract public class AnimatedThings {
         return sprite;
     }
 
-    public void update(double time){
 
-        index= (int)((time%(maxindex*durée))/durée);
+    public void update(double time) {
 
-        if (o==true||p<250){
-            t=time-lasttime;
-            v=a*t-75;
-            p=(1/2)*a*(t)*(t)+v*(t)+249;
+        index = (int) ((time % (maxindex * durée)) / durée);
+
+        if (o == true || p < 250) {
+            t = time - lasttime;
+            v = a * t - 100;
+            p = (1 / 2) * a * (t) * (t) + v * (t) + 249;
             sprite.setY(p);
             //System.out.println( p+"   "+t);
-            o=false;
-            if (0>p2-p){
-                sprite.setViewport(new Rectangle2D(firstx+offset,160,hauteur, largeur));
-                System.out.println( "yooo");
+            o = false;
+            if (0 > p2 - p) {
+                sprite.setViewport(new Rectangle2D(firstx + offset, 160, hauteur, largeur));
+
             }
-            if (0<p2-p){
-                sprite.setViewport(new Rectangle2D(firstx,160,hauteur, largeur));
-                System.out.println( "heyyy   ");
+            if (0 < p2 - p) {
+                sprite.setViewport(new Rectangle2D(firstx, 160, hauteur, largeur));
+
             }
-            p2=p;
+            p2 = p;
 
+        } else {
+            lasttime = time;
+            sprite.setViewport(new Rectangle2D(firstx + (index * offset), firsty, hauteur, largeur));
         }
-        else {
-            lasttime=time;
-            sprite.setViewport(new Rectangle2D(firstx+(index*offset),firsty,hauteur, largeur));
-        }
 
-        if (p>250){
+        if (p > 250) {
 
-            p=250;
-            v=0;
+            p = 250;
+            v = 0;
             sprite.setY(p);
 
 
         }
+
+
+
+
 
 
     }
+
+
+    public void updatem(double time) {
+
+        index = (int) ((time % (maxindex * durée)) / durée);
+        sprite.setViewport(new Rectangle2D(firstx + (index * offset), firsty, hauteur, largeur));
+
+    }
+
+    public Rectangle2D gethitbox(int lo, int lar){
+        return new Rectangle2D(getX(),getY(),lo,lar);
+    }
+
+
 
     public void setY(double y) {
         this.y = y;
@@ -103,4 +123,17 @@ abstract public class AnimatedThings {
     public double getY() {
         return y;
     }
+
+    public void setX(double x) {this.x = x;}
+
+    public double getX() {return x;}
+
+    public double getDurée() {
+        return durée;
+    }
+
+    public void setDurée(double durée) {
+        this.durée = durée;
+    }
+
 }
