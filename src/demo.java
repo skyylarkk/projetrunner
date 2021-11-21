@@ -18,7 +18,7 @@ import java.nio.file.Paths;
     public class demo extends Application{
         private static final Image SCENERY = new Image("Capture.PNG", 1300, 300, true, true);
         final private ImageView ImageViewSceneryLeft = new ImageView(SCENERY);
-        SoundBackground music = new SoundBackground();
+        SoundBackground music;
 
 
 
@@ -28,16 +28,19 @@ import java.nio.file.Paths;
             primaryStage.setTitle("Demo");
             Group root = new Group();
             Group root2 = new Group();
-            gameScene scene = new gameScene(root);
+
             Scene scene2 = new Scene(root2);
             root2.getChildren().add(ImageViewSceneryLeft);
             primaryStage.setScene(scene2);
             scene2.setOnMouseClicked((event)->{
+                gameScene scene = new gameScene(root);
                 primaryStage.setScene(scene);
+                music = new SoundBackground();
+                music.run();
             });
             primaryStage.show();
 
-                music.run();
+
 
 
 

@@ -23,13 +23,7 @@ public class hero extends AnimatedThings {
     public hero(double x, double y, String fileName) {
         super(fileName, x, y, 75, 100, 85, 1, 6, 4, 5);
 
-        /*this.x=x;
-        this.y=y;
-        spritesheet=new Image(fileName);
-        sprite = new ImageView(spritesheet);
-        sprite.setViewport(new Rectangle2D(10,10,70,90));
-        sprite.setX(x);
-        sprite.setY(y);*/
+
 
     }
 
@@ -46,7 +40,7 @@ public class hero extends AnimatedThings {
         getSprite().setX(g);
         b=b-10;
         System.out.println(b);
-        if(b<1900){b=1900;}
+        if(b<1800){b=1800;}
         if(g>1000){g=1000;}
 
 
