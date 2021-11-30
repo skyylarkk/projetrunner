@@ -87,7 +87,7 @@ public class gameScene extends Scene{
 
     }
 
-    void creator(){
+    void creator(){//créé les pieces
 
         for (int i = 0;i<nb;i++){
             list.add(new Foe(x+Math.random()*250,y+Math.random()*150,"piece1.png"));
@@ -96,7 +96,7 @@ public class gameScene extends Scene{
     }
 
 
-    void render(){
+    void render(){//fait défiler à l'infini le décors
         double offset = camera.getX()% mid.getX();
         gauche.getSprite().setViewport(new Rectangle2D(offset,0,gauche.getX(), gauche.getY()));
         mid.getSprite().setViewport(new Rectangle2D(0,0,mid.getX(), mid.getY()));
@@ -122,12 +122,14 @@ public class gameScene extends Scene{
 
            Hero.gethitbox(75,100);
            mehdi.gethitbox(300,300);
-
+           //detecte la collision entre le méchant et le héro
            if(Hero.getSprite().getX()>mehdi.getX()+200){
                for(int i=0;i< list.size();i++){
+                   //déplace les pièces
                    list.get(i).move();
 
                }
+
                Hero.update(elapsedSeconds);
                mehdi.updatem(elapsedSeconds);
                Hero.slowdown(elapsedSeconds);
@@ -135,15 +137,18 @@ public class gameScene extends Scene{
                m=m-0.5;
                render();
                scoref++;
+               //incrémente le score
                if (scoref%10==0){score=score+1;}
 
-               scorel2.setText(score.toString());
-               for(int i=0;i<list.size();i++){
+               scorel2.setText(score.toString());//affiche le score en jeu
+               for(int i=0;i<list.size();i++){//détecte la collision du héro avec chaque pièce
 
                    if((Hero.getSprite().getX()<list.get(i).getSprite().getX()&&Hero.getSprite().getX()+75>list.get(i).getSprite().getX())&&(Hero.getSprite().getY()+100>list.get(i).getSprite().getY()&&Hero.getSprite().getY()-40<list.get(i).getSprite().getY())){
 
                        Hero.boost();
-                       list.get(i).getSprite().setViewport(new Rectangle2D(300, 300, 1, 1));
+
+
+                       list.get(i).getSprite().setViewport(new Rectangle2D(300, 300, 1, 1));//fait disparaitre la pièce après avoir été attrapée
 
 
 

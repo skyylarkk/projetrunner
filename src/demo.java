@@ -26,19 +26,19 @@ import java.nio.file.Paths;
         public void start(Stage primaryStage){
 
             primaryStage.setTitle("Demo");
-            Group root = new Group();
-            Group root2 = new Group();
+            Group root = new Group();//groupe contenant le jeu
+            Group root2 = new Group();//groupe contenant le menu
 
             Scene scene2 = new Scene(root2);
             root2.getChildren().add(ImageViewSceneryLeft);
-            primaryStage.setScene(scene2);
-            scene2.setOnMouseClicked((event)->{
+            primaryStage.setScene(scene2);//charge le menu
+            scene2.setOnMouseClicked((event)->{//en cas de clic sur la fenetre, affiche le jeu et lance la musique
                 gameScene scene = new gameScene(root);
                 primaryStage.setScene(scene);
                 music = new SoundBackground();
                 music.run();
             });
-            primaryStage.show();
+            primaryStage.show();//affiche la scene
 
 
 

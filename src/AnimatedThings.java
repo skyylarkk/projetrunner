@@ -60,18 +60,18 @@ abstract public class AnimatedThings {
 
         index = (int) ((time % (maxindex * durée)) / durée);
 
-        if (o == true || p < 250) {
+        if (o == true || p < 250) {//gère le saut du héro
             t = time - lasttime;
             v = a * t - 100;
             p = (1 / 2) * a * (t) * (t) + v * (t) + 249;
             sprite.setY(p);
-            //System.out.println( p+"   "+t);
+
             o = false;
-            if (0 > p2 - p) {
+            if (0 > p2 - p) {//gere l'affichage pendant le saut
                 sprite.setViewport(new Rectangle2D(firstx + offset, 160, hauteur, largeur));
 
             }
-            if (0 < p2 - p) {
+            if (0 < p2 - p) {//gere l'affichage pendant le saut
                 sprite.setViewport(new Rectangle2D(firstx, 160, hauteur, largeur));
 
             }
@@ -82,7 +82,7 @@ abstract public class AnimatedThings {
             sprite.setViewport(new Rectangle2D(firstx + (index * offset), firsty, hauteur, largeur));
         }
 
-        if (p > 250) {
+        if (p > 250) {//empeche le héro de tomber en dessous des 240 pixels
 
             p = 250;
             v = 0;
@@ -99,7 +99,7 @@ abstract public class AnimatedThings {
     }
 
 
-    public void updatem(double time) {
+    public void updatem(double time) {//gère l'affichage du méchant
 
         index = (int) ((time % (maxindex * durée)) / durée);
         sprite.setViewport(new Rectangle2D(firstx + (index * offset), firsty, hauteur, largeur));

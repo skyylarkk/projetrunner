@@ -30,9 +30,9 @@ public class hero extends AnimatedThings {
 
     public void jump() {
         o = true;
-    }
+    }//fonctionne avec gamescene et fait sauter le héro
 
-    public void slowdown(double t){
+    public void slowdown(double t){//ralenti le hero jusqu'a une vitesse minimum
         g=getSprite().getX();
 
         g=g-t/b;
@@ -46,7 +46,7 @@ public class hero extends AnimatedThings {
 
 
     }
-    public void boost(){
+    public void boost(){//fait accélérer le héro
 
             for (int i = 0; i < 30; i++) {
 

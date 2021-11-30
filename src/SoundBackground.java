@@ -13,11 +13,11 @@ public class SoundBackground extends Application implements Runnable {
     @Override
     public void run() {
         try{
-            mediaPlayer.setCycleCount(3);
-            mediaPlayer.setOnReady(() -> {
-                mediaPlayer.play();
-                mediaPlayer.setOnEndOfMedia(() -> {
-                    mediaPlayer.play();
+            mediaPlayer.setCycleCount(3);//se prépare à jouer le média 3 fois
+            mediaPlayer.setOnReady(() -> {//une fois que le média est pret
+                mediaPlayer.play();//joue le média
+                mediaPlayer.setOnEndOfMedia(() -> {//lorsque le média est fini
+                    mediaPlayer.play();//rejoue le média
                 });
             });
         }
